@@ -28,7 +28,7 @@ loginForm.addEventListener("submit", async (e) => {
 
     if (result.status === "success") {
       alert("Login successful!");
-      window.location.href = "protected.html";
+      window.location.href = "index.html";
     } else {
       alert(result.message || "Login failed.");
     }

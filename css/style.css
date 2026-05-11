@@ -391,6 +391,80 @@ p {
   inset: 0;
 }
 
+.chart-placeholder.has-data .line {
+  display: none;
+}
+
+.chart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-axis {
+  stroke: rgba(120, 124, 142, 0.35);
+  stroke-width: 1.2;
+}
+
+.chart-noise {
+  fill: none;
+  stroke: #e2a2ab;
+  stroke-width: 2.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.chart-co2 {
+  fill: none;
+  stroke: #56b7d5;
+  stroke-width: 2.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.chart-label {
+  fill: #7a7d8e;
+  font-size: 11px;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.chart-point {
+  fill: #e2a2ab;
+  stroke: #ffffff;
+  stroke-width: 1.4;
+  cursor: pointer;
+}
+
+.chart-point:hover {
+  fill: #56b7d5;
+}
+
+.chart-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  background: rgba(43, 46, 59, 0.92);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  max-width: calc(100% - 20px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.92rem;
+  color: #7d8192;
+}
+
 .noise-line::before,
 .co2-line::before {
   content: "";
