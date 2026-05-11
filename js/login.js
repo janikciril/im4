@@ -1,9 +1,21 @@
 // login.js
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+const loginForm = document.getElementById("loginForm");
+const passwordInput = document.getElementById("password");
+const passwordToggle = document.querySelector(".password-toggle");
+
+if (passwordToggle && passwordInput) {
+  passwordToggle.addEventListener("click", () => {
+    const isHidden = passwordInput.type === "password";
+    passwordInput.type = isHidden ? "text" : "password";
+    passwordToggle.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
+  });
+}
+
+loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const password = passwordInput.value.trim();
 
   try {
     const response = await fetch("api/login.php", {

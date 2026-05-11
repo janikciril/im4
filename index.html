@@ -1,36 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoomCheck Übersicht</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>Welcome to IM4 Demo Page</h1>
+    <main class="app-shell">
+      <section class="card dashboard-header">
+        <div class="header-main">
+          <div class="brand-badge" aria-hidden="true">⌂</div>
+          <div>
+            <h1>RoomCheck</h1>
+            <p class="subtitle"><span data-bind="roomCount">3</span> Räume</p>
+          </div>
+        </div>
+        <a class="icon-action" href="login.html" aria-label="Zum Login">↪</a>
+      </section>
 
-    <div class="navigation">
-      <ul>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li>
-          <a href="protected.html">Protected Page</a> (only visible when logged
-          in)
-        </li>
-      </ul>
-    </div>
+      <section class="filters-row" id="roomsList">
+        <button class="chip chip-muted" type="button" data-bind="allRoomsLabel">Alle Räume</button>
+        <button class="chip chip-active room-chip" type="button" data-bind="activeRoomName">
+          Emmas Zimmer
+        </button>
+      </section>
 
-    <div class="info">
-      <h2>About This Site</h2>
-      <p>This is a simple authentication demo that shows:</p>
-      <ul>
-        <li>User registration</li>
-        <li>User login</li>
-        <li>Protected content that's only visible to logged-in users</li>
-      </ul>
-      <p>
-        If you try to access the protected page without being logged in, you'll
-        be redirected to the login page.
-      </p>
-    </div>
+      <section class="card room-create-card">
+        <h2>Neuen Raum anlegen</h2>
+        <p class="section-text">Platzhalter für spätere Datenbank-Anbindung.</p>
+        <form class="room-create-form" id="roomCreateForm">
+          <input
+            type="text"
+            id="newRoomName"
+            name="newRoomName"
+            placeholder="Raumname eingeben"
+            data-bind="newRoomName"
+          />
+          <button type="submit" id="addRoomBtn">Raum hinzufügen</button>
+        </form>
+      </section>
+
+      <section class="card alerts-card">
+        <ul class="alert-list" id="alertsList">
+          <li><span class="alert-dot" aria-hidden="true">!</span>Lautstärke-Grenzwert vor 15 Min überschritten</li>
+          <li><span class="alert-dot info" aria-hidden="true">!</span>CO2-Grenzwert vor 2 Min überschritten</li>
+        </ul>
+      </section>
+
+      <section class="card focus-card">
+        <h2><span class="status-dot" aria-hidden="true"></span>Aufmerksamkeit empfohlen</h2>
+
+        <article class="sensor-tile">
+          <p class="sensor-label">Lautstärke</p>
+          <p class="sensor-reading">
+            <span id="noiseValue" data-bind="noiseValue">65</span>
+            <span class="unit">dB</span>
+          </p>
+          <div class="bars" aria-hidden="true">
+            <span style="height: 8%"></span><span style="height: 12%"></span><span style="height: 18%"></span>
+            <span style="height: 25%"></span><span style="height: 32%"></span><span style="height: 40%"></span>
+            <span style="height: 48%"></span><span style="height: 55%"></span><span style="height: 62%"></span>
+            <span style="height: 70%" class="warn"></span><span style="height: 78%" class="warn"></span>
+            <span style="height: 84%" class="warn"></span><span style="height: 90%" class="muted"></span>
+            <span style="height: 94%" class="muted"></span><span style="height: 96%" class="muted"></span>
+          </div>
+        </article>
+
+        <article class="sensor-tile">
+          <p class="sensor-label co2">CO2-Gehalt</p>
+          <p class="sensor-reading">
+            <span id="co2Value" data-bind="co2Value">950</span>
+            <span class="unit">ppm</span>
+          </p>
+          <div class="wave-placeholder" aria-hidden="true"></div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Heutige Aktivität</h2>
+        <div class="chart-placeholder" role="img" aria-label="Diagramm Platzhalter für Lautstärke- und CO2-Verlauf">
+          <div class="line noise-line"></div>
+          <div class="line co2-line"></div>
+        </div>
+        <p class="chart-legend">Lautstärke (dB) · CO2 (ppm)</p>
+      </section>
+
+      <section class="card">
+        <h2>Benachrichtigungen</h2>
+        <div class="stack-list" id="notificationsList">
+          <article class="stack-item blue">
+            <div class="circle"></div>
+            <div>
+              <p>Luftqualität sinkt - vielleicht ein Fenster öffnen</p>
+              <small>vor 2 Min</small>
+            </div>
+          </article>
+          <article class="stack-item sand">
+            <div class="circle"></div>
+            <div>
+              <p>Es wird etwas lauter im Raum</p>
+              <small>vor 15 Min</small>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Gerätestatus</h2>
+        <div class="stack-list">
+          <article class="stack-item green">
+            <div class="circle"></div>
+            <div>
+              <p>Verbindung</p>
+              <small id="connectionState" data-bind="connectionState">Verbunden</small>
+            </div>
+            <span class="status-ok" aria-hidden="true"></span>
+          </article>
+          <article class="stack-item blue">
+            <div class="circle"></div>
+            <div>
+              <p>Batterie</p>
+              <small><span id="batteryValue" data-bind="batteryValue">87</span>%</small>
+            </div>
+            <span class="battery-bars" aria-hidden="true"></span>
+          </article>
+          <article class="stack-item lilac">
+            <div>
+              <p>Zuletzt aktualisiert</p>
+              <small id="lastUpdated" data-bind="lastUpdated">Gerade eben</small>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <script src="js/dashboard.js"></script>
   </body>
 </html>

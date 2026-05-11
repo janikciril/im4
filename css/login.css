@@ -1,0 +1,202 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: #2f2f37;
+  background: linear-gradient(135deg, #6f7cc5 0%, #77d2c2 100%);
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 12px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 26px 40px rgba(45, 50, 88, 0.18);
+  padding: 34px 28px 24px;
+}
+
+.brand-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #7e6adf 0%, #64d0c6 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 6px 0 26px;
+  text-align: center;
+  color: #6f6d83;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #55536b;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  border: 1px solid #e7e5ef;
+  background: #f8f8fc;
+  border-radius: 12px;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 15px;
+  color: #2f2f37;
+  outline: none;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: #b4b2c3;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #9c93e2;
+  box-shadow: 0 0 0 3px rgba(126, 106, 223, 0.14);
+  background: #fff;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 44px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: #a3a0b5;
+  cursor: pointer;
+}
+
+.row-options {
+  margin-top: -2px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.remember {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #56546a;
+}
+
+.remember input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: #7c6fde;
+}
+
+.muted-link {
+  color: #8b80cf;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.muted-link:hover {
+  text-decoration: underline;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #7f6ee0 0%, #65d1c6 100%);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(92, 114, 199, 0.32);
+}
+
+.submit-btn:hover {
+  filter: brightness(1.03);
+}
+
+.register-text {
+  margin: 20px 0 0;
+  text-align: center;
+  color: #6f6d83;
+  font-size: 14px;
+}
+
+.register-text a {
+  color: #8b80cf;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+.demo-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  text-align: center;
+}
+
+@media (min-width: 560px) {
+  .page-shell {
+    padding: 28px 16px;
+  }
+
+  .login-card {
+    padding: 34px 28px 24px;
+  }
+
+  h1 {
+    font-size: 2.3rem;
+  }
+}

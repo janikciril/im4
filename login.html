@@ -2,25 +2,59 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Login</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoomCheck Login</title>
+    <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
-    <h1>Login</h1>
+    <main class="page-shell">
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="brand-icon" aria-hidden="true">↦</div>
+        <h1 id="login-title">RoomCheck</h1>
+        <p class="subtitle">Sign in to continue</p>
 
-    <form id="loginForm">
-      <div>
-        <label>Email</label>
-        <input type="email" id="email" required />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" id="password" required />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-field">
+              <input
+                type="password"
+                id="password"
+                placeholder="........"
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" class="password-toggle" aria-label="Show password">
+                👁
+              </button>
+            </div>
+          </div>
+          <div class="row-options">
+            <label class="remember">
+              <input type="checkbox" id="rememberMe" />
+              <span>Stay signed in</span>
+            </label>
+            <a href="#" class="muted-link">Forgot password?</a>
+          </div>
+          <button type="submit" class="submit-btn">Sign in</button>
+        </form>
 
-    <p>Don’t have an account? <a href="register.html">Register here</a>.</p>
+        <p class="register-text">
+          No account yet?
+          <a href="register.html">Create one now</a>
+        </p>
+      </section>
+    </main>
 
     <script src="js/login.js"></script>
   </body>
