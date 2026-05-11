@@ -196,42 +196,49 @@ p {
   align-items: center;
   min-height: 40px;
   border-radius: 999px;
-  border: 1px solid #dddee5;
+  border: none;
+  outline: none;
+  appearance: none;
   background: #f2f3f7;
   color: #6e7080;
   font-weight: 600;
   padding: 0 16px;
   font-size: 0.95rem;
-  transition: box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease, background 0.18s ease;
 }
 
 .chip.chip-active {
   background: linear-gradient(90deg, #8b7de5 0%, #6acfc5 100%);
   color: #ffffff;
-  border-color: transparent;
   box-shadow: 0 3px 10px rgba(139, 125, 229, 0.32);
   font-weight: 700;
 }
 
 .chip.chip-active:hover {
-  filter: brightness(1.06);
-  box-shadow: 0 4px 14px rgba(139, 125, 229, 0.42);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(139, 125, 229, 0.4);
+  filter: brightness(1.05);
+}
+
+.chip.chip-active:active {
+  transform: scale(0.98);
 }
 
 .chip.chip-muted {
   color: #6f7382;
+  box-shadow: inset 0 0 0 1px #dddee5;
 }
 
 .chip.chip-muted:hover {
+  transform: scale(1.04);
   background: #f8f8fc;
-  border-color: #d0d1d9;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 0 0 1px #d0d1d9, 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .chip.chip-muted:active {
+  transform: scale(0.98);
   background: #f2f3f7;
-  box-shadow: none;
 }
 
 .room-chip {
