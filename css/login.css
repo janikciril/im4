@@ -30,16 +30,29 @@ body {
 }
 
 .brand-icon {
-  width: 64px;
-  height: 64px;
+  width: 88px;
+  height: 88px;
   margin: 0 auto 14px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #7e6adf 0%, #64d0c6 100%);
-  color: #fff;
+  border-radius: 28px;
+  background: rgba(111, 124, 197, 0.2);
+  color: #6f7cc5;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.brand-icon svg {
+  width: 46px;
+  height: 46px;
+}
+
+.brand-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 h1 {
