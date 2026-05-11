@@ -115,8 +115,12 @@ p {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 2px;
-  scrollbar-width: thin;
+  padding: 4px 2px 6px;
+  scrollbar-width: none;
+}
+
+.filters-row::-webkit-scrollbar {
+  display: none;
 }
 
 .filters-row .chip {
@@ -196,59 +200,42 @@ p {
   background: #f2f3f7;
   color: #6e7080;
   font-weight: 600;
-  padding: 0 12px;
+  padding: 0 16px;
   font-size: 0.95rem;
+  transition: box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
 }
 
-.chip-active {
-  color: #4c4f5f;
- background: linear-gradient(90deg, #8b7de5 0%, #6acfc5 100%)
-}
-
-/* Erhöhte Spezifität: .chip + .chip-active zusammen stellt sicher, dass es gewinnt */
 .chip.chip-active {
-  background: linear-gradient(90deg, #8b7de5 0%, #6acfc5 100%) !important;
-  color: #ffffff !important;
-  border-color: transparent !important;
-  box-shadow: 0 4px 12px rgba(139, 125, 229, 0.3) !important;
+  background: linear-gradient(90deg, #8b7de5 0%, #6acfc5 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(139, 125, 229, 0.32);
   font-weight: 700;
 }
 
-/* Damit der Übergang beim Wechseln zwischen den Räumen weich aussieht */
-.chip {
-  transition: all 0.3s ease !important;
-}
-
-/* Hover-Effekt für den aktiven Raum-Button */
 .chip.chip-active:hover {
-  transform: translateY(-2px) !important;
-  filter: brightness(1.1);
-  box-shadow: 0 6px 15px rgba(139, 125, 229, 0.4) !important;
+  filter: brightness(1.06);
+  box-shadow: 0 4px 14px rgba(139, 125, 229, 0.42);
 }
 
+.chip.chip-muted {
+  color: #6f7382;
+}
+
+.chip.chip-muted:hover {
+  background: #f8f8fc;
+  border-color: #d0d1d9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.chip.chip-muted:active {
+  background: #f2f3f7;
+  box-shadow: none;
+}
 
 .room-chip {
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.chip-muted {
-  color: #6f7382;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-
-/* 2. Hover-Effekt: Leichtes Anheben */
-.chip-muted:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fbfcff; /* Wird minimal heller */
-  border-color: #d0d1d9;    /* Etwas deutlicherer Rand */
-}
-
-/* 3. Active-Effekt: Klick-Feedback */
-.chip-muted:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  background-color: #f2f3f7;
+  white-space: nowrap;
 }
 
 .alerts-card {
