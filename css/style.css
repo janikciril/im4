@@ -91,6 +91,26 @@ p {
   background: #f8f8fa;
 }
 
+/* 1. Transition for the icon circle */
+.icon-action {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* 2. Lift and shadow on hover */
+.icon-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Slightly brightens the background */
+  color: #4c4f5f; /* Darkens the arrow slightly for contrast */
+}
+
+/* 3. Click feedback */
+.icon-action:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #f2f3f6;
+}
+
 .filters-row {
   display: flex;
   gap: 8px;
@@ -149,6 +169,22 @@ p {
   cursor: not-allowed;
 }
 
+#addRoomBtn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+#addRoomBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  filter: brightness(1.08);
+}
+
+#addRoomBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  filter: brightness(0.95);
+  }
+
 .chip {
   text-decoration: none;
   display: inline-flex;
@@ -175,6 +211,22 @@ p {
 
 .chip-muted {
   color: #6f7382;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* 2. Hover-Effekt: Leichtes Anheben */
+.chip-muted:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fbfcff; /* Wird minimal heller */
+  border-color: #d0d1d9;    /* Etwas deutlicherer Rand */
+}
+
+/* 3. Active-Effekt: Klick-Feedback */
+.chip-muted:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #f2f3f7;
 }
 
 .alerts-card {
@@ -292,10 +344,32 @@ p {
 .wave-placeholder {
   height: 84px;
   border-radius: 16px;
-  background: radial-gradient(circle at 10% 20%, rgba(87, 177, 212, 0.35) 2px, transparent 3px),
-    radial-gradient(circle at 30% 45%, rgba(77, 183, 208, 0.25) 2px, transparent 3px),
-    radial-gradient(circle at 80% 25%, rgba(113, 197, 223, 0.33) 2px, transparent 3px),
-    linear-gradient(140deg, #9bd2ee, #7ebee2);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(140deg, #9bd2ee, #7ebee2);
+}
+
+.wave-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3) 4px, transparent 5px),
+    radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.2) 3px, transparent 4px);
+  
+  background-size: 60px 60px, 100px 100px, 80px 80px;
+  
+  animation: co2Rise 6s linear infinite;
+}
+
+@keyframes co2Rise {
+  from {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position: 0 -60px, 0 -100px, 0 -80px;
+  }
 }
 
 .chart-placeholder {
