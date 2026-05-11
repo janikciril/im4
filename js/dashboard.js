@@ -83,8 +83,14 @@
   };
 
   const updateRoomCount = () => {
-    const roomChips = roomsList.querySelectorAll(".room-chip");
-    roomCount.textContent = String(roomChips.length);
+    const count = roomsList.querySelectorAll(".room-chip").length;
+    const subtitle = roomCount.closest("p") ?? roomCount.parentElement;
+
+    if (count === 0) {
+      subtitle.innerHTML = "Noch keine Räume vorhanden";
+    } else {
+      subtitle.innerHTML = `<span data-bind="roomCount">${count}</span> ${count === 1 ? "Raum" : "Räume"}`;
+    }
   };
 
   const renderAlerts = (noise, co2) => {
