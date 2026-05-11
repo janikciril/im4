@@ -331,7 +331,8 @@
 
     chip.addEventListener("click", async () => {
       setActiveRoom(chip);
-      await Promise.all([loadSensorData(), loadSensorHistory()]);
+      loadSensorData().catch(console.error);
+      loadSensorHistory().catch(console.error);
     });
 
     return chip;
@@ -354,7 +355,7 @@
       });
 
     updateRoomCount();
-    setActiveRoom(roomsList.querySelector(".room-chip"));
+    setAllRoomsActive();
   };
 
   const loadRooms = async () => {
@@ -432,7 +433,8 @@
 
   allRoomsChip.addEventListener("click", async () => {
     setAllRoomsActive();
-    await Promise.all([loadSensorData(), loadSensorHistory()]);
+    loadSensorData().catch(console.error);
+    loadSensorHistory().catch(console.error);
   });
 
   form.addEventListener("submit", async (event) => {
@@ -459,7 +461,8 @@
     try {
       await createRoom(roomName);
       await loadRooms();
-      await Promise.all([loadSensorData(), loadSensorHistory()]);
+      loadSensorData().catch(console.error);
+      loadSensorHistory().catch(console.error);
       input.value = "";
       input.focus();
     } catch (error) {
@@ -471,8 +474,15 @@
   });
 
   loadRooms()
-    .then(async () => {
-      await Promise.all([loadSensorData(), loadSensorHistory()]);
+    .then(() => {
+      loadSensorData().catch((err) => {
+        console.error(err);
+        renderSensorData(null);
+      });
+      loadSensorHistory().catch((err) => {
+        console.error(err);
+        renderActivityChart([]);
+      });
     })
     .catch((error) => {
       console.error(error);

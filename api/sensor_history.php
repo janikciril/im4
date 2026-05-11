@@ -37,37 +37,29 @@ try {
 
         $historyStmt = $pdo->prepare("
             SELECT id, room_id, noise_level, air_quality, motion_detected, created_at
-            FROM (
-                SELECT id, room_id, noise_level, air_quality, motion_detected, created_at
-                FROM sensor_data
-                WHERE room_id = :room_id
-                ORDER BY id DESC
-                LIMIT :limit
-            ) recent
-            ORDER BY id ASC
+            FROM sensor_data
+            WHERE room_id = :room_id
+            ORDER BY id DESC
+            LIMIT :limit
         ");
         $historyStmt->bindValue(':room_id', $roomId, PDO::PARAM_INT);
         $historyStmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $historyStmt->execute();
     } else {
         $historyStmt = $pdo->prepare("
-            SELECT id, room_id, noise_level, air_quality, motion_detected, created_at
-            FROM (
-                SELECT sd.id, sd.room_id, sd.noise_level, sd.air_quality, sd.motion_detected, sd.created_at
-                FROM sensor_data sd
-                INNER JOIN rooms r ON r.id = sd.room_id
-                WHERE r.user_id = :user_id
-                ORDER BY sd.id DESC
-                LIMIT :limit
-            ) recent
-            ORDER BY id ASC
+            SELECT sd.id, sd.room_id, sd.noise_level, sd.air_quality, sd.motion_detected, sd.created_at
+            FROM sensor_data sd
+            INNER JOIN rooms r ON r.id = sd.room_id
+            WHERE r.user_id = :user_id
+            ORDER BY sd.id DESC
+            LIMIT :limit
         ");
         $historyStmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
         $historyStmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $historyStmt->execute();
     }
 
-    $history = $historyStmt->fetchAll(PDO::FETCH_ASSOC);
+    $history = array_reverse($historyStmt->fetchAll(PDO::FETCH_ASSOC));
 
     echo json_encode([
         "status" => "success",
