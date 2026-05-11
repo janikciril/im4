@@ -219,14 +219,22 @@
     const firstTime = formatTime(points[0]?.created_at);
     const middleTime = formatTime(points[Math.floor(points.length / 2)]?.created_at);
     const lastTime = formatTime(points[points.length - 1]?.created_at);
-    const pointDots = points
-      .map((point, index) => {
-        const noise = Number(point.noise_level ?? 0);
-        const x = padding + ((width - padding * 2) * index) / Math.max(points.length - 1, 1);
-        const y = padding + (height - padding * 2) - ((noise - minValue) / (maxValue - minValue || 1)) * (height - padding * 2);
-        return `<circle class="chart-point" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.2" data-point-index="${index}" />`;
-      })
-      .join("");
+
+    const innerWidth = width - padding * 2;
+    const innerHeight = height - padding * 2;
+    const range = maxValue - minValue || 1;
+
+    const buildDots = (values, series) =>
+      values
+        .map((value, index) => {
+          const x = padding + (innerWidth * index) / Math.max(values.length - 1, 1);
+          const y = padding + innerHeight - ((value - minValue) / range) * innerHeight;
+          return `<circle class="chart-point chart-point-${series}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.2" data-point-index="${index}" data-series="${series}" />`;
+        })
+        .join("");
+
+    const noiseDots = buildDots(noiseValues, "noise");
+    const co2Dots = buildDots(co2Values, "co2");
 
     activityChart.classList.add("has-data");
     activityChart.innerHTML = `
@@ -235,7 +243,8 @@
         <line class="chart-axis" x1="${padding}" y1="${padding}" x2="${padding}" y2="${height - padding}" />
         <polyline class="chart-noise" points="${noisePolyline}" />
         <polyline class="chart-co2" points="${co2Polyline}" />
-        ${pointDots}
+        ${noiseDots}
+        ${co2Dots}
         <text class="chart-label" x="${padding}" y="${height - 4}" text-anchor="start">${firstTime}</text>
         <text class="chart-label" x="${width / 2}" y="${height - 4}" text-anchor="middle">${middleTime}</text>
         <text class="chart-label" x="${width - padding}" y="${height - 4}" text-anchor="end">${lastTime}</text>
@@ -254,10 +263,15 @@
 
     if (!pointElement) {
       tooltip.hidden = true;
+      tooltip.classList.remove("is-noise", "is-co2");
+      activityChart.querySelectorAll(".chart-point.is-active").forEach((dot) => {
+        dot.classList.remove("is-active");
+      });
       return;
     }
 
     const pointIndex = Number(pointElement.getAttribute("data-point-index"));
+    const series = pointElement.getAttribute("data-series");
     const point = chartPointsCache[pointIndex];
     if (!point) {
       tooltip.hidden = true;
@@ -269,8 +283,16 @@
     const time = formatTime(point.created_at);
     const age = formatRelativeTime(point.created_at);
 
-    tooltip.textContent = `${time} (${age}) • ${noise} dB • ${co2} ppm`;
+    const detail = series === "co2" ? `${co2} ppm CO₂` : `${noise} dB Lautstärke`;
+    tooltip.textContent = `${time} (${age}) • ${detail}`;
+    tooltip.classList.remove("is-noise", "is-co2");
+    tooltip.classList.add(series === "co2" ? "is-co2" : "is-noise");
     tooltip.hidden = false;
+
+    activityChart.querySelectorAll(".chart-point.is-active").forEach((dot) => {
+      dot.classList.remove("is-active");
+    });
+    pointElement.classList.add("is-active");
   });
 
   const setActiveRoom = (chip, options = {}) => {

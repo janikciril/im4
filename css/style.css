@@ -430,14 +430,24 @@ p {
 }
 
 .chart-point {
-  fill: #e2a2ab;
   stroke: #ffffff;
   stroke-width: 1.4;
   cursor: pointer;
+  transition: r 0.15s ease;
 }
 
-.chart-point:hover {
+.chart-point-noise {
+  fill: #e2a2ab;
+}
+
+.chart-point-co2 {
   fill: #56b7d5;
+}
+
+.chart-point:hover,
+.chart-point.is-active {
+  r: 5.8;
+  stroke-width: 2;
 }
 
 .chart-tooltip {
@@ -454,6 +464,15 @@ p {
   max-width: calc(100% - 20px);
   overflow: hidden;
   text-overflow: ellipsis;
+  border-left: 3px solid transparent;
+}
+
+.chart-tooltip.is-noise {
+  border-left-color: #e2a2ab;
+}
+
+.chart-tooltip.is-co2 {
+  border-left-color: #56b7d5;
 }
 
 .chart-empty {
@@ -488,8 +507,25 @@ p {
 
 .chart-legend {
   text-align: center;
-  color: #7a7d8e;
   font-size: 0.95rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-noise {
+  color: #c9818c;
+  font-weight: 600;
+}
+
+.legend-co2 {
+  color: #3e9eba;
+  font-weight: 600;
+}
+
+.legend-sep {
+  color: #b0b2be;
 }
 
 .stack-list {
