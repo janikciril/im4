@@ -7,7 +7,33 @@ body {
   min-height: 100vh;
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   color: #343641;
-  background: #e9eaee;
+  background: #ece7f2;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  margin-right: 12px;
+  border-radius: 14px;
+  background: rgba(111, 124, 197, 0.2);
+  color: #6f7cc5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.brand-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.brand-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .app-shell,
@@ -31,6 +57,7 @@ body {
 }
 
 h1 {
+  text-align: center;
   margin: 0;
   font-size: 2rem;
   line-height: 1.2;
@@ -65,17 +92,6 @@ p {
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.brand-badge {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  color: #72829d;
-  background: #dce7f6;
-  font-size: 22px;
 }
 
 .icon-action {
@@ -163,7 +179,7 @@ p {
   border-radius: 12px;
   padding: 0 14px;
   color: #fff;
-  background: linear-gradient(90deg, #8b7de5 0%, #6acfc5 100%);
+  background: #a588ca;
   font-weight: 600;
   cursor: pointer;
 }
@@ -217,7 +233,7 @@ p {
 }
 
 .chip.chip-active {
-  background: linear-gradient(90deg, #8b7de5 0%, #6acfc5 100%);
+  background: #a588ca;
   color: #ffffff;
   font-weight: 700;
 }

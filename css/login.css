@@ -7,7 +7,7 @@ body {
   min-height: 100vh;
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   color: #2f2f37;
-  background: linear-gradient(135deg, #6f7cc5 0%, #77d2c2 100%);
+  background: #ece7f2;
 }
 
 .page-shell {
@@ -164,7 +164,7 @@ input[type="password"]:focus {
   height: 46px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(90deg, #7f6ee0 0%, #65d1c6 100%);
+  background: #a588ca;
   color: #fff;
   font-size: 17px;
   font-weight: 600;
