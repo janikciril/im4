@@ -685,3 +685,28 @@ p {
   }
 }
   
+/* Die Animation: Von unsichtbar & leicht versetzt zu sichtbar & an Ort und Stelle */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.card, .filters-row {
+  opacity: 0;
+  animation: slideInUp 0.8s ease-out forwards;
+}
+
+.dashboard-header { animation-delay: 0.1s; }
+
+.filters-row { animation-delay: 0.2s; }
+
+.card:nth-of-type(1) { animation-delay: 0.3s; }
+.card:nth-of-type(2) { animation-delay: 0.4s; }
+.card:nth-of-type(3) { animation-delay: 0.5s; }
+.card:nth-of-type(4) { animation-delay: 0.6s; }
+.card:nth-of-type(5) { animation-delay: 0.7s; }
