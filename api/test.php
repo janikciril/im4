@@ -1,10 +1,11 @@
 <?php
-require 'config.php';
-// $pdo ist bereits durch config.php erstellt
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// Testdaten einfügen
+require '../system/config.php';
+
 $sql = "INSERT INTO sensor_data (room_id, noise_level, air_quality, motion_detected) 
-        VALUES (1, 65, 800, 0)";
+        VALUES (4, 35, 300, 0)";
 
 $pdo->exec($sql);
 echo "Testdaten erfolgreich eingefügt!";
