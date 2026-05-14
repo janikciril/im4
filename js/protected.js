@@ -23,5 +23,35 @@ async function checkAuth() {
   }
 }
 
-// Check auth when page loads
-window.addEventListener("load", checkAuth);
+async function fetchSensorData() {
+  try {
+    const response = await fetch("/api/sensor_latest.php", {
+      credentials: "include",
+    });
+
+    if (!response.ok) return;
+
+    const result = await response.json();
+
+    if (result.status === "success" && result.sensor) {
+      const { noise_level, air_quality, recorded_at } = result.sensor;
+
+      document.getElementById("noise-val").textContent =
+        noise_level !== null ? noise_level : "—";
+      document.getElementById("air-val").textContent =
+        air_quality !== null ? air_quality : "—";
+      document.getElementById("sensor-time").textContent = recorded_at
+        ? new Date(recorded_at).toLocaleTimeString()
+        : "—";
+    }
+  } catch (error) {
+    console.error("Sensor fetch failed:", error);
+  }
+}
+
+window.addEventListener("load", async () => {
+  const authed = await checkAuth();
+  if (!authed) return;
+  fetchSensorData();
+  setInterval(fetchSensorData, 5000);
+});

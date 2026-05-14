@@ -36,10 +36,10 @@ try {
         }
 
         $historyStmt = $pdo->prepare("
-            SELECT id, room_id, noise_level, air_quality, motion_detected, created_at
+            SELECT id, room_id, noise_level, air_quality, recorded_at
             FROM sensor_data
             WHERE room_id = :room_id
-            ORDER BY id DESC
+            ORDER BY recorded_at DESC
             LIMIT :limit
         ");
         $historyStmt->bindValue(':room_id', $roomId, PDO::PARAM_INT);
@@ -47,11 +47,11 @@ try {
         $historyStmt->execute();
     } else {
         $historyStmt = $pdo->prepare("
-            SELECT sd.id, sd.room_id, sd.noise_level, sd.air_quality, sd.motion_detected, sd.created_at
+            SELECT sd.id, sd.room_id, sd.noise_level, sd.air_quality, sd.recorded_at
             FROM sensor_data sd
             INNER JOIN rooms r ON r.id = sd.room_id
             WHERE r.user_id = :user_id
-            ORDER BY sd.id DESC
+            ORDER BY sd.recorded_at DESC
             LIMIT :limit
         ");
         $historyStmt->bindValue(':user_id', $userId, PDO::PARAM_INT);

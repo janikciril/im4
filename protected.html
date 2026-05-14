@@ -27,6 +27,21 @@
         </div>
       </section>
 
+      <section class="card" id="sensorCard">
+        <h2>Live Sensor Data</h2>
+        <div class="protected-grid" style="margin-top:10px;">
+          <div class="sensor-tile">
+            <p class="sensor-label">Noise Level</p>
+            <p class="sensor-reading"><span id="noise-val">—</span> <span class="unit">dB</span></p>
+          </div>
+          <div class="sensor-tile">
+            <p class="sensor-label co2">Air Quality</p>
+            <p class="sensor-reading"><span id="air-val">—</span> <span class="unit">AQI</span></p>
+          </div>
+        </div>
+        <p class="muted-note" style="margin-top:10px;">Last updated: <span id="sensor-time">—</span></p>
+      </section>
+
       <section class="card">
         <button id="logoutBtn" class="logout-btn">Logout</button>
       </section>

@@ -284,6 +284,52 @@ p {
   color: #60606c;
   font-weight: 500;
   font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.alert-dismiss-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid #c8bfad;
+  background: rgba(255, 255, 255, 0.55);
+  color: #7a7060;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.alert-dismiss-btn:hover {
+  background: #d4ead7;
+  border-color: #7ec688;
+  color: #3a8f48;
+}
+
+.notif-dismiss-btn {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.5);
+  color: #5a5e6e;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.notif-dismiss-btn:hover {
+  background: #d4ead7;
+  border-color: #7ec688;
+  color: #3a8f48;
 }
 
 .alert-dot {
@@ -698,6 +744,85 @@ p {
 
   .sensor-reading {
     font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  body {
+    background: #e4dded;
+  }
+
+  .app-shell {
+    max-width: 1200px;
+    padding: 32px 32px 40px;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  /* Header: full width */
+  .app-shell > section:nth-child(1) {
+    grid-column: 1 / -1;
+    padding: 18px 22px;
+  }
+
+  /* Alerts: full width */
+  .app-shell > section:nth-child(2) {
+    grid-column: 1 / -1;
+  }
+
+  /* Focus card (sensors): left column, row 3 */
+  .app-shell > section:nth-child(3) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  /* Activity chart: right column, row 3 */
+  .app-shell > section:nth-child(4) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  /* Notifications: left column, row 4 */
+  .app-shell > section:nth-child(5) {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  /* Device status: right column, row 4 */
+  .app-shell > section:nth-child(6) {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  /* Sensor tiles side by side inside focus card */
+  .focus-card .sensor-tiles-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .focus-card .sensor-tile + .sensor-tile {
+    margin-top: 0;
+  }
+
+  .card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .sensor-reading {
+    font-size: 2.6rem;
+  }
+
+  .chart-placeholder {
+    height: 220px;
   }
 }
   

@@ -14,6 +14,7 @@ if (passwordToggle && passwordInput) {
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = passwordInput.value.trim();
 
@@ -23,7 +24,7 @@ registerForm.addEventListener("submit", async (e) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, email, password }),
     });
     const result = await response.json();
 

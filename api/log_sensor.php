@@ -29,21 +29,13 @@ $data = json_decode(file_get_contents('php://input'), true);
 $roomId = (int) ($data['room_id'] ?? 0);
 $noiseLevel = isset($data['noise_level']) ? (float) $data['noise_level'] : null;
 $airQuality = isset($data['air_quality']) ? (float) $data['air_quality'] : null;
-$motionDetectedRaw = $data['motion_detected'] ?? null;
 
-if ($roomId <= 0 || $noiseLevel === null || $airQuality === null || $motionDetectedRaw === null) {
+if ($roomId <= 0 || $noiseLevel === null || $airQuality === null) {
     http_response_code(400);
     echo json_encode([
         "status" => "error",
-        "message" => "room_id, noise_level, air_quality and motion_detected are required"
+        "message" => "room_id, noise_level and air_quality are required"
     ]);
-    exit;
-}
-
-$motionDetected = filter_var($motionDetectedRaw, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-if ($motionDetected === null) {
-    http_response_code(400);
-    echo json_encode(["status" => "error", "message" => "motion_detected must be boolean"]);
     exit;
 }
 
@@ -61,14 +53,13 @@ try {
 
     // Insert sensor data
     $insert = $pdo->prepare("
-        INSERT INTO sensor_data (room_id, noise_level, air_quality, motion_detected)
-        VALUES (:room_id, :noise_level, :air_quality, :motion_detected)
+        INSERT INTO sensor_data (room_id, noise_level, air_quality)
+        VALUES (:room_id, :noise_level, :air_quality)
     ");
     $insert->execute([
         ':room_id' => $roomId,
         ':noise_level' => $noiseLevel,
         ':air_quality' => $airQuality,
-        ':motion_detected' => $motionDetected ? 1 : 0
     ]);
 
     echo json_encode([

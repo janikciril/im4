@@ -20,30 +20,12 @@
           </div>
           <div>
             <h1>RoomCheck</h1>
-            <p class="subtitle"><span data-bind="roomCount">3</span> Räume</p>
+            <p class="subtitle" id="roomName">Mein Raum</p>
           </div>
         </div>
         <a class="icon-action" href="login.html" aria-label="Zum Login">↪</a>
       </section>
 
-      <section class="filters-row" id="roomsList">
-        <button class="chip chip-active" type="button" data-bind="allRoomsLabel">Alle Räume</button>
-      </section>
-
-      <section class="card room-create-card">
-        <h2>Neuen Raum anlegen</h2>
-        <p class="section-text">Platzhalter für spätere Datenbank-Anbindung.</p>
-        <form class="room-create-form" id="roomCreateForm">
-          <input
-            type="text"
-            id="newRoomName"
-            name="newRoomName"
-            placeholder="Raumname eingeben"
-            data-bind="newRoomName"
-          />
-          <button type="submit" id="addRoomBtn">Raum hinzufügen</button>
-        </form>
-      </section>
 
       <section class="card alerts-card">
         <ul class="alert-list" id="alertsList">
@@ -55,30 +37,32 @@
       <section class="card focus-card">
         <h2><span class="status-dot" aria-hidden="true"></span>Aufmerksamkeit empfohlen</h2>
 
-        <article class="sensor-tile">
-          <p class="sensor-label">Lautstärke</p>
-          <p class="sensor-reading">
-            <span id="noiseValue" data-bind="noiseValue">65</span>
-            <span class="unit">dB</span>
-          </p>
-          <div class="bars" aria-hidden="true">
-            <span style="height: 8%"></span><span style="height: 12%"></span><span style="height: 18%"></span>
-            <span style="height: 25%"></span><span style="height: 32%"></span><span style="height: 40%"></span>
-            <span style="height: 48%"></span><span style="height: 55%"></span><span style="height: 62%"></span>
-            <span style="height: 70%" class="warn"></span><span style="height: 78%" class="warn"></span>
-            <span style="height: 84%" class="warn"></span><span style="height: 90%" class="muted"></span>
-            <span style="height: 94%" class="muted"></span><span style="height: 96%" class="muted"></span>
-          </div>
-        </article>
+        <div class="sensor-tiles-wrapper">
+          <article class="sensor-tile">
+            <p class="sensor-label">Lautstärke</p>
+            <p class="sensor-reading">
+              <span id="noiseValue" data-bind="noiseValue">65</span>
+              <span class="unit">dB</span>
+            </p>
+            <div class="bars" aria-hidden="true">
+              <span style="height: 8%"></span><span style="height: 12%"></span><span style="height: 18%"></span>
+              <span style="height: 25%"></span><span style="height: 32%"></span><span style="height: 40%"></span>
+              <span style="height: 48%"></span><span style="height: 55%"></span><span style="height: 62%"></span>
+              <span style="height: 70%" class="warn"></span><span style="height: 78%" class="warn"></span>
+              <span style="height: 84%" class="warn"></span><span style="height: 90%" class="muted"></span>
+              <span style="height: 94%" class="muted"></span><span style="height: 96%" class="muted"></span>
+            </div>
+          </article>
 
-        <article class="sensor-tile">
-          <p class="sensor-label co2">CO2-Gehalt</p>
-          <p class="sensor-reading">
-            <span id="co2Value" data-bind="co2Value">950</span>
-            <span class="unit">ppm</span>
-          </p>
-          <div class="wave-placeholder" aria-hidden="true"></div>
-        </article>
+          <article class="sensor-tile">
+            <p class="sensor-label co2">CO2-Gehalt</p>
+            <p class="sensor-reading">
+              <span id="co2Value" data-bind="co2Value">950</span>
+              <span class="unit">ppm</span>
+            </p>
+            <div class="wave-placeholder" aria-hidden="true"></div>
+          </article>
+        </div>
       </section>
 
       <section class="card">

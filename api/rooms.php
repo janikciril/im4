@@ -15,36 +15,37 @@ $userId = (int) $_SESSION['user_id'];
 $method = $_SERVER['REQUEST_METHOD'] ?? '';
 
 if ($method === 'GET') {
-    $stmt = $pdo->prepare("SELECT id, name, user_id FROM rooms WHERE user_id = :user_id ORDER BY id DESC");
+    // Return the single room for this user
+    $stmt = $pdo->prepare("SELECT id, name, user_id FROM rooms WHERE user_id = :user_id ORDER BY id ASC LIMIT 1");
     $stmt->execute([':user_id' => $userId]);
-    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $room = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo json_encode([
-        "status" => "success",
-        "rooms" => $rooms
-    ]);
-    exit;
-}
+    // Auto-create a room if the user doesn't have one yet (existing accounts)
+    if (!$room) {
+        $userStmt = $pdo->prepare("SELECT name, email FROM users WHERE id = :id");
+        $userStmt->execute([':id' => $userId]);
+        $user = $userStmt->fetch(PDO::FETCH_ASSOC);
 
-if ($method === 'POST') {
-    $data = json_decode(file_get_contents("php://input"), true);
-    $name = trim($data['name'] ?? '');
+        // Derive display name from stored name or email prefix
+        $displayName = !empty($user['name'])
+            ? $user['name']
+            : ucfirst(explode('.', explode('@', $user['email'])[0])[0]);
 
-    if ($name === '') {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Room name is required"]);
-        exit;
+        $roomName = $displayName . "s Raum";
+
+        $insert = $pdo->prepare("INSERT INTO rooms (name, user_id) VALUES (:name, :user_id)");
+        $insert->execute([':name' => $roomName, ':user_id' => $userId]);
+
+        $room = [
+            'id'      => (int) $pdo->lastInsertId(),
+            'name'    => $roomName,
+            'user_id' => $userId
+        ];
     }
 
-    $insert = $pdo->prepare("INSERT INTO rooms (name, user_id) VALUES (:name, :user_id)");
-    $insert->execute([
-        ':name' => $name,
-        ':user_id' => $userId
-    ]);
-
     echo json_encode([
         "status" => "success",
-        "message" => "Room created successfully"
+        "rooms"  => [$room]
     ]);
     exit;
 }
